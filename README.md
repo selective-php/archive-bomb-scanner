@@ -58,6 +58,9 @@ if ($scannerResult->isArchiveBomb()) {
 ```php
 use Selective\ArchiveBomb\ArchiveBombScanner;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
+use SplTempFileObject;
+
+$file = new SplTempFileObject();
 
 $file->fwrite('my file content');
 
