@@ -53,7 +53,7 @@ class ArchiveBombScannerTest extends TestCase
 
         // In memory scanning
         $tempFile = new SplTempFileObject();
-        $tempFile->fwrite(file_get_contents($filename));
+        $tempFile->fwrite((string)file_get_contents($filename));
         $actual = $scanner->scanFile($file);
 
         self::assertSame($expected, $actual->isArchiveBomb());
@@ -84,8 +84,8 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function testScanFileNotFound(): void
     {
-        static::getExpectedException(RuntimeException::class);
-        static::expectExceptionMessage('File not found: temp.zip');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('File not found: temp.zip');
 
         $scanner = new ArchiveBombScanner();
         $scanner->addEngine(new ZipBombEngine());
