@@ -22,9 +22,7 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function testCreateInstance(): void
     {
-        new ArchiveBombScanner();
-
-        self::assertTrue(true);
+        self::assertInstanceOf(ArchiveBombScanner::class, new ArchiveBombScanner());
     }
 
     /**
