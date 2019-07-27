@@ -17,5 +17,5 @@ interface EngineInterface
      *
      * @return ScannerResult The result
      */
-    public function scanFile(SplFileObject $file): ?ScannerResult;
+    public function scanFile(SplFileObject $file): ScannerResult;
 }

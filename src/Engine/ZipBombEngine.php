@@ -2,6 +2,7 @@
 
 namespace Selective\ArchiveBomb\Engine;
 
+use RuntimeException;
 use Selective\ArchiveBomb\Scanner\ScannerResult;
 use SplFileObject;
 use ZipArchive;
@@ -16,12 +17,21 @@ final class ZipBombEngine implements EngineInterface
      *
      * @param SplFileObject $file The zip file
      *
+     * @throws RuntimeException
+     *
      * @return ScannerResult The result
      */
-    public function scanFile(SplFileObject $file): ?ScannerResult
+    public function scanFile(SplFileObject $file): ScannerResult
     {
         $zip = new ZipArchive();
-        $zip->open($file->getRealPath(), ZIPARCHIVE::CHECKCONS);
+
+        $realPath = $file->getRealPath();
+
+        if ($realPath === false) {
+            throw new RuntimeException(sprintf('File not found: %s', $file->getFilename()));
+        }
+
+        $zip->open($realPath, ZIPARCHIVE::CHECKCONS);
 
         // Sum ZIP index file size
         $i = 0;
@@ -37,7 +47,7 @@ final class ZipBombEngine implements EngineInterface
         $file->fread(22);
 
         // Convert 4 bytes, little-endian to int
-        $size2 = unpack('V', $file->fread(4))[1];
+        $size2 = unpack('V', (string)$file->fread(4))[1];
 
         // Header uncompressed size must be the same as files uncompressed size
         $result = $size !== $size2;
