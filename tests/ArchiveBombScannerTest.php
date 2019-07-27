@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
+use Selective\ArchiveBomb\Scanner\ScannerResult;
 use SplFileObject;
 use SplTempFileObject;
 
@@ -48,6 +49,7 @@ class ArchiveBombScannerTest extends TestCase
         $actual = $scanner->scanFile($file);
 
         self::assertSame($expected, $actual->isArchiveBomb());
+        self::assertTrue($actual->equals(new ScannerResult($actual->isArchiveBomb())));
 
         // In memory scanning
         $tempFile = new SplTempFileObject();
