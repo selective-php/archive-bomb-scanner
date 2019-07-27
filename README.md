@@ -49,7 +49,7 @@ $scannerResult = $scanner->scanFile($file);
 if ($scannerResult->isArchiveBomb()) {
     echo 'Archive bomb detected!';
 } else {
-   echo 'File is clean';
+    echo 'File is clean';
 }
 ```
 
