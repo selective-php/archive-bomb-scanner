@@ -2,7 +2,10 @@
 
 namespace Selective\ArchiveBomb\Test;
 
+use FilesystemIterator;
 use PHPUnit\Framework\TestCase;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use RuntimeException;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
@@ -64,15 +67,38 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function providerGetImageTypeFromFile(): array
     {
-        return [
-            [__DIR__ . '/files/10.zip', true],
-            [__DIR__ . '/files/20.zip', true],
-            [__DIR__ . '/files/30.zip', true],
-            [__DIR__ . '/files/34.zip', true],
-            [__DIR__ . '/files/42.zip', true],
-            [__DIR__ . '/files/ok.zip', false],
-            [__DIR__ . '/files/ok-encrypted.zip', false],
-        ];
+        $result = [];
+
+        foreach ($this->findFiles(__DIR__ . '/files/zip') as $file) {
+            $result[] = [$file, true];
+        }
+
+        foreach ($this->findFiles(__DIR__ . '/files/zip-ok') as $file) {
+            $result[] = [$file, false];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Find all files.
+     *
+     * @param string $path The path
+     *
+     * @return array The files
+     */
+    private function findFiles(string $path): array
+    {
+        $result = [];
+        $directory = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
+        foreach (new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST) as $item) {
+            if (!$item->isFile()) {
+                continue;
+            }
+            $result[] = $item->getRealPath();
+        }
+
+        return $result;
     }
 
     /**
