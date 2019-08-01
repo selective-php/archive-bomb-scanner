@@ -5,7 +5,7 @@ namespace Selective\ArchiveBomb\Scanner;
 /**
  * Scanner result value object.
  */
-final class ScannerResult
+final class BombScannerResult
 {
     /**
      * @var bool The result
@@ -35,11 +35,11 @@ final class ScannerResult
     /**
      * Compare with other value object.
      *
-     * @param ScannerResult $other The other type
+     * @param BombScannerResult $other The other type
      *
      * @return bool Status
      */
-    public function equals(ScannerResult $other): bool
+    public function equals(BombScannerResult $other): bool
     {
         return $this->isBomb === $other->isBomb;
     }

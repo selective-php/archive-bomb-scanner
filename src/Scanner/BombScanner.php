@@ -6,9 +6,9 @@ use Selective\ArchiveBomb\Engine\EngineInterface;
 use SplFileObject;
 
 /**
- * Archive bomb scanner.
+ * Bomb scanner.
  */
-final class ArchiveBombScanner
+final class BombScanner
 {
     /**
      * @var EngineInterface[]
@@ -30,9 +30,9 @@ final class ArchiveBombScanner
      *
      * @param SplFileObject $file The archive file
      *
-     * @return ScannerResult The scanning result
+     * @return BombScannerResult The scanning result
      */
-    public function scanFile(SplFileObject $file): ScannerResult
+    public function scanFile(SplFileObject $file): BombScannerResult
     {
         foreach ($this->engines as $engines) {
             $result = $engines->scanFile($file);
@@ -42,6 +42,6 @@ final class ArchiveBombScanner
             }
         }
 
-        return new ScannerResult(false);
+        return new BombScannerResult(false);
     }
 }

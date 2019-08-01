@@ -3,7 +3,7 @@
 namespace Selective\ArchiveBomb\Engine;
 
 use RuntimeException;
-use Selective\ArchiveBomb\Scanner\ScannerResult;
+use Selective\ArchiveBomb\Scanner\BombScannerResult;
 use SplFileObject;
 
 /**
@@ -18,9 +18,9 @@ final class PngBompEngine implements EngineInterface
      *
      * @throws RuntimeException
      *
-     * @return ScannerResult The result
+     * @return BombScannerResult The result
      */
-    public function scanFile(SplFileObject $file): ScannerResult
+    public function scanFile(SplFileObject $file): BombScannerResult
     {
         $realPath = $file->getRealPath();
 
@@ -30,7 +30,7 @@ final class PngBompEngine implements EngineInterface
 
         if (!$this->isPng($file)) {
             // This is not a PNG
-            return new ScannerResult(false);
+            return new BombScannerResult(false);
         }
 
         $file->rewind();
@@ -48,10 +48,10 @@ final class PngBompEngine implements EngineInterface
 
         if ($width > 10000 || $height > 10000) {
             // Invalid image
-            return new ScannerResult(true);
+            return new BombScannerResult(true);
         }
 
-        return new ScannerResult(false);
+        return new BombScannerResult(false);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Selective\ArchiveBomb\Engine;
 
-use Selective\ArchiveBomb\Scanner\ScannerResult;
+use Selective\ArchiveBomb\Scanner\BombScannerResult;
 use SplFileObject;
 
 /**
@@ -15,7 +15,7 @@ interface EngineInterface
      *
      * @param SplFileObject $file The file
      *
-     * @return ScannerResult The result
+     * @return BombScannerResult The result
      */
-    public function scanFile(SplFileObject $file): ScannerResult;
+    public function scanFile(SplFileObject $file): BombScannerResult;
 }

@@ -9,8 +9,8 @@ use RecursiveIteratorIterator;
 use RuntimeException;
 use Selective\ArchiveBomb\Engine\PngBompEngine;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
-use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
-use Selective\ArchiveBomb\Scanner\ScannerResult;
+use Selective\ArchiveBomb\Scanner\BombScanner;
+use Selective\ArchiveBomb\Scanner\BombScannerResult;
 use SplFileObject;
 use SplTempFileObject;
 
@@ -26,7 +26,7 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function testCreateInstance(): void
     {
-        self::assertInstanceOf(ArchiveBombScanner::class, new ArchiveBombScanner());
+        self::assertInstanceOf(BombScanner::class, new BombScanner());
     }
 
     /**
@@ -43,7 +43,7 @@ class ArchiveBombScannerTest extends TestCase
     {
         self::assertFileExists($filename);
 
-        $scanner = new ArchiveBombScanner();
+        $scanner = new BombScanner();
 
         $scanner->addEngine(new ZipBombEngine());
         $scanner->addEngine(new PngBompEngine());
@@ -52,7 +52,7 @@ class ArchiveBombScannerTest extends TestCase
         $actual = $scanner->scanFile($file);
 
         self::assertSame($expected, $actual->isBomb());
-        self::assertTrue($actual->equals(new ScannerResult($actual->isBomb())));
+        self::assertTrue($actual->equals(new BombScannerResult($actual->isBomb())));
 
         // In memory scanning
         $tempFile = new SplTempFileObject();
@@ -121,7 +121,7 @@ class ArchiveBombScannerTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('File not found: temp.zip');
 
-        $scanner = new ArchiveBombScanner();
+        $scanner = new BombScanner();
         $scanner->addEngine(new ZipBombEngine());
 
         $filename = __DIR__ . '/temp.zip';
