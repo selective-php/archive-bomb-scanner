@@ -31,6 +31,10 @@ final class ZipBombEngine implements EngineInterface
             throw new RuntimeException(sprintf('File not found: %s', $file->getFilename()));
         }
 
+        if (!$this->isZip($file)) {
+            return new ScannerResult(false);
+        }
+
         $zip->open($realPath, ZIPARCHIVE::CHECKCONS);
 
         // Sum ZIP index file size
@@ -53,5 +57,19 @@ final class ZipBombEngine implements EngineInterface
         $result = $size !== $size2;
 
         return new ScannerResult($result);
+    }
+
+    /**
+     * Detect file type.
+     *
+     * @param SplFileObject $file The file
+     *
+     * @return bool The status
+     */
+    private function isZip(SplFileObject $file): bool
+    {
+        $file->rewind();
+
+        return $file->fread(4) === "PK\3\4";
     }
 }

@@ -10,16 +10,16 @@ final class ScannerResult
     /**
      * @var bool The result
      */
-    private $isArchiveBomb;
+    private $isBomb;
 
     /**
      * ImageType constructor.
      *
-     * @param bool $isArchiveBomb The result
+     * @param bool $isBomb The result
      */
-    public function __construct(bool $isArchiveBomb)
+    public function __construct(bool $isBomb)
     {
-        $this->isArchiveBomb = $isArchiveBomb;
+        $this->isBomb = $isBomb;
     }
 
     /**
@@ -27,13 +27,13 @@ final class ScannerResult
      *
      * @return bool The result
      */
-    public function isArchiveBomb(): bool
+    public function isBomb(): bool
     {
-        return $this->isArchiveBomb;
+        return $this->isBomb;
     }
 
     /**
-     * Compare with other image type.
+     * Compare with other value object.
      *
      * @param ScannerResult $other The other type
      *
@@ -41,6 +41,6 @@ final class ScannerResult
      */
     public function equals(ScannerResult $other): bool
     {
-        return $this->isArchiveBomb === $other->isArchiveBomb;
+        return $this->isBomb === $other->isBomb;
     }
 }

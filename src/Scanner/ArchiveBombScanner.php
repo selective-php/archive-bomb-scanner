@@ -37,7 +37,7 @@ final class ArchiveBombScanner
         foreach ($this->engines as $engines) {
             $result = $engines->scanFile($file);
 
-            if ($result->isArchiveBomb()) {
+            if ($result->isBomb()) {
                 return $result;
             }
         }

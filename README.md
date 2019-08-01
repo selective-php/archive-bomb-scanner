@@ -1,6 +1,6 @@
 # selective/archive-bomb-scanner
 
-Archive (ZIP) bomb scanner for PHP.
+Archive (ZIP) and PNG bomb scanner for PHP.
 
 [![Latest Version on Packagist](https://img.shields.io/github/release/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://packagist.org/packages/selective/archive-bomb-scanner)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -19,6 +19,7 @@ Archive (ZIP) bomb scanner for PHP.
 ### Supported formats
 
 * ZIP
+* PNG
 
 ## Requirements
 
@@ -32,7 +33,7 @@ composer require selective/archive-bomb-scanner
 
 ## Usage
 
-### Scan file
+### Scan ZIP file
 
 ```php
 use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
@@ -46,7 +47,7 @@ $scanner->addEngine(new ZipBombEngine());
 
 $scannerResult = $scanner->scanFile($file);
 
-if ($scannerResult->isArchiveBomb()) {
+if ($scannerResult->isBomb()) {
     echo 'Archive bomb detected!';
 } else {
     echo 'File is clean';
@@ -67,7 +68,28 @@ $file->fwrite('my file content');
 $scanner = new ArchiveBombScanner();
 $scanner->addEngine(new ZipBombEngine());
 
-$isArchiveBomb = $detector->scanFile($file)->isArchiveBomb(); // true or false
+$isBomb = $detector->scanFile($file)->isBomb(); // true or false
+```
+
+### Scan PNG file
+
+```php
+use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
+use Selective\ArchiveBomb\Engine\PngBombEngine;
+use SplFileObject;
+
+$file = new SplFileObject('example.png');
+
+$scanner = new ArchiveBombScanner();
+$scanner->addEngine(new PngBombEngine());
+
+$scannerResult = $scanner->scanFile($file);
+
+if ($scannerResult->isBomb()) {
+    echo 'PNG bomb detected!';
+} else {
+    echo 'File is clean';
+}
 ```
 
 ## License
