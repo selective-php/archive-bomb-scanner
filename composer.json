@@ -1,12 +1,14 @@
 {
     "name": "selective/archive-bomb-scanner",
     "type": "library",
-    "description": "Archive bomb scanner",
+    "description": "ZIP and PNG bomb scanner",
     "keywords": [
         "archive-bomb",
         "zip-bomb",
         "scanner",
-        "zip"
+        "zip",
+        "png",
+        "png-bomb"
     ],
     "homepage": "https://github.com/selective-php/archive-bomb-scanner",
     "license": "MIT",
