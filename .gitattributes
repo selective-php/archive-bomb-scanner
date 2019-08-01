@@ -32,3 +32,4 @@
 # - Include binary diff in patches instead of "binary files differ."
 *.zip binary
 *.dll binary
+*.png binary
