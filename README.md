@@ -1,6 +1,6 @@
 # selective/archive-bomb-scanner
 
-Archive (ZIP) and PNG bomb scanner for PHP.
+ZIP and PNG bomb scanner for PHP.
 
 [![Latest Version on Packagist](https://img.shields.io/github/release/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://packagist.org/packages/selective/archive-bomb-scanner)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -9,17 +9,12 @@ Archive (ZIP) and PNG bomb scanner for PHP.
 [![Quality Score](https://img.shields.io/scrutinizer/quality/g/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://scrutinizer-ci.com/g/selective-php/archive-bomb-scanner/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/selective/archive-bomb-scanner.svg?style=flat-square)](https://packagist.org/packages/selective/archive-bomb-scanner/stats)
 
-
 ## Features
 
-* Detection of the ZIP archive bombs
+* Detection of ZIP archive bombs
+* Detection of PNG bombs
 * No dependencies
 * Very fast
-
-### Supported formats
-
-* ZIP
-* PNG
 
 ## Requirements
 
@@ -36,13 +31,13 @@ composer require selective/archive-bomb-scanner
 ### Scan ZIP file
 
 ```php
-use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
+use Selective\ArchiveBomb\Scanner\BombScanner;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use SplFileObject;
 
 $file = new SplFileObject('42.zip');
 
-$scanner = new ArchiveBombScanner();
+$scanner = new BombScanner();
 $scanner->addEngine(new ZipBombEngine());
 
 $scannerResult = $scanner->scanFile($file);
@@ -57,7 +52,7 @@ if ($scannerResult->isBomb()) {
 ### Scan in-memory file
 
 ```php
-use Selective\ArchiveBomb\ArchiveBombScanner;
+use Selective\ArchiveBomb\BombScanner;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use SplTempFileObject;
 
@@ -65,7 +60,7 @@ $file = new SplTempFileObject();
 
 $file->fwrite('my file content');
 
-$scanner = new ArchiveBombScanner();
+$scanner = new BombScanner();
 $scanner->addEngine(new ZipBombEngine());
 
 $isBomb = $detector->scanFile($file)->isBomb(); // true or false
@@ -74,13 +69,13 @@ $isBomb = $detector->scanFile($file)->isBomb(); // true or false
 ### Scan PNG file
 
 ```php
-use Selective\ArchiveBomb\Scanner\ArchiveBombScanner;
+use Selective\ArchiveBomb\Scanner\BombScanner;
 use Selective\ArchiveBomb\Engine\PngBombEngine;
 use SplFileObject;
 
 $file = new SplFileObject('example.png');
 
-$scanner = new ArchiveBombScanner();
+$scanner = new BombScanner();
 $scanner->addEngine(new PngBombEngine());
 
 $scannerResult = $scanner->scanFile($file);
