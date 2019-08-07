@@ -12,6 +12,7 @@ ZIP and PNG bomb scanner for PHP.
 ## Features
 
 * Detection of ZIP archive bombs
+* Detection of RAR archive bombs
 * Detection of PNG bombs
 * No dependencies
 * Very fast
@@ -49,7 +50,7 @@ if ($scannerResult->isBomb()) {
 }
 ```
 
-### Scan in-memory file
+### Scan in-memory ZIP file
 
 ```php
 use Selective\ArchiveBomb\BombScanner;
@@ -64,6 +65,27 @@ $scanner = new BombScanner();
 $scanner->addEngine(new ZipBombEngine());
 
 $isBomb = $detector->scanFile($file)->isBomb(); // true or false
+```
+
+### Scan RAR file
+
+```php
+use Selective\ArchiveBomb\Scanner\BombScanner;
+use Selective\ArchiveBomb\Engine\RarBombEngine;
+use SplFileObject;
+
+$file = new SplFileObject('10GB.rar');
+
+$scanner = new BombScanner();
+$scanner->addEngine(new RarBombEngine());
+
+$scannerResult = $scanner->scanFile($file);
+
+if ($scannerResult->isBomb()) {
+    echo 'Archive bomb detected!';
+} else {
+    echo 'File is clean';
+}
 ```
 
 ### Scan PNG file

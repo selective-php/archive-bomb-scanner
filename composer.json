@@ -19,10 +19,12 @@
         "overtrue/phplint": "^1.1",
         "phpunit/phpunit": "^7",
         "phpstan/phpstan-shim": "^0.11",
-        "squizlabs/php_codesniffer": "^3.4"
+        "squizlabs/php_codesniffer": "^3.4",
+        "selective/rar": "^0.1"
     },
     "suggest": {
-        "ext-zip": "Using this extension to detect ZIP archive bomb"
+        "ext-zip": "Use this extension to detect ZIP archive bombs",
+        "selective/rar": "Use this package to detect RAR archive bombs"
     },
     "scripts": {
         "test": "phpunit --configuration phpunit.xml",
