@@ -15,16 +15,16 @@ final class RarBombEngine implements EngineInterface
     /**
      * @var int
      */
-    private $maxRation;
+    private $maxRatio;
 
     /**
      * The constructor.
      *
-     * @param int $maxRation The max Bomb size ratio (Original size / Compressed size)
+     * @param int $maxRatio The max Bomb size ratio (Original size / Compressed size)
      */
-    public function __construct(int $maxRation = 1000)
+    public function __construct(int $maxRatio = 1000)
     {
-        $this->maxRation = $maxRation;
+        $this->maxRatio = $maxRatio;
     }
 
     /**
@@ -60,7 +60,7 @@ final class RarBombEngine implements EngineInterface
             $ration = $originalSize / $compressedSize;
         }
 
-        return new BombScannerResult($ration >= $this->maxRation);
+        return new BombScannerResult($ration >= $this->maxRatio);
     }
 
     /**
