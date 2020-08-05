@@ -67,7 +67,7 @@ class ArchiveBombScannerTest extends TestCase
     /**
      * Provider.
      *
-     * @return array
+     * @return array<mixed> The test data
      */
     public function providerGetImageTypeFromFile(): array
     {
@@ -105,7 +105,7 @@ class ArchiveBombScannerTest extends TestCase
      *
      * @param string $path The path
      *
-     * @return array The files
+     * @return array<mixed> The files
      */
     private function findFiles(string $path): array
     {
