@@ -23,8 +23,6 @@ final class ZipBombEngine implements EngineInterface
      */
     public function scanFile(SplFileObject $file): BombScannerResult
     {
-        $zip = new ZipArchive();
-
         $realPath = $file->getRealPath();
 
         if ($realPath === false) {
@@ -35,7 +33,7 @@ final class ZipBombEngine implements EngineInterface
             return new BombScannerResult(false);
         }
 
-        $zip->open($realPath, ZIPARCHIVE::CHECKCONS);
+        $zip = $this->openZip($realPath);
 
         // Sum ZIP index file size
         $i = 0;
@@ -57,6 +55,41 @@ final class ZipBombEngine implements EngineInterface
         $result = $size !== $size2;
 
         return new BombScannerResult($result);
+    }
+
+    /**
+     * Open zip file.
+     *
+     * @param string $filename The zip file
+     *
+     * @throws RuntimeException
+     *
+     * @return ZipArchive The zip archive
+     */
+    private function openZip(string $filename): ZipArchive
+    {
+        $zip = new ZipArchive();
+        $result = $zip->open($filename, ZIPARCHIVE::CHECKCONS);
+
+        if ($result !== true) {
+            $errorMap = [
+                ZipArchive::ER_EXISTS => 'File already exists',
+                ZipArchive::ER_INCONS => 'Zip archive inconsistent.',
+                ZipArchive::ER_INVAL => 'Invalid argument.',
+                ZipArchive::ER_MEMORY => 'Malloc failure.',
+                ZipArchive::ER_NOENT => 'No such file.',
+                ZipArchive::ER_NOZIP => 'Not a zip archive.',
+                ZipArchive::ER_OPEN => 'Can\'t open file.',
+                ZipArchive::ER_READ => 'Read error.',
+                ZipArchive::ER_SEEK => 'Seek error.',
+            ];
+
+            $errorReason = $errorMap[(int)$result] ?? 'Unknown error.';
+
+            throw new RuntimeException(sprintf('Unable to open: %s, reason: %s', $filename, $errorReason));
+        }
+
+        return $zip;
     }
 
     /**
