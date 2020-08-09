@@ -28,9 +28,9 @@ final class RarBombEngine implements EngineInterface
     }
 
     /**
-     * Scan for ZIP bomb.
+     * Scan for RAR bomb.
      *
-     * @param SplFileObject $file The zip file
+     * @param SplFileObject $file The rar file
      *
      * @throws RuntimeException
      *
