@@ -14,7 +14,7 @@ final class PngBompEngine implements EngineInterface
     /**
      * Scan for PNG bomb.
      *
-     * @param SplFileObject $file The zip file
+     * @param SplFileObject $file The png file
      *
      * @throws RuntimeException
      *
