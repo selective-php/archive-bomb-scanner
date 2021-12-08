@@ -22,8 +22,6 @@ class ArchiveBombScannerTest extends TestCase
 {
     /**
      * Test.
-     *
-     * @return void
      */
     public function testCreateInstance(): void
     {
@@ -37,8 +35,6 @@ class ArchiveBombScannerTest extends TestCase
      *
      * @param string $filename The file
      * @param bool $expected The expected result
-     *
-     * @return void
      */
     public function testScanFile(string $filename, bool $expected): void
     {
@@ -123,8 +119,6 @@ class ArchiveBombScannerTest extends TestCase
 
     /**
      * Test.
-     *
-     * @return void
      */
     public function testScanFileNotFound(): void
     {
