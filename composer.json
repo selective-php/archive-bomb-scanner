@@ -21,7 +21,7 @@
         "phpstan/phpstan": "1.*",
         "friendsofphp/php-cs-fixer": "^3",
         "squizlabs/php_codesniffer": "^3.4",
-        "selective/rar": "^0.2"
+        "selective/rar": "^0.1 || ^0.2"
     },
     "suggest": {
         "ext-zip": "Use this extension to detect ZIP archive bombs",
