@@ -58,6 +58,7 @@ final class RarBombEngine implements EngineInterface
             $compressedSize = $entry->getPackedSize();
             $originalSize = $entry->getUnpackedSize();
             $ration = $originalSize / $compressedSize;
+            break;
         }
 
         return new BombScannerResult($ration >= $this->maxRatio);
