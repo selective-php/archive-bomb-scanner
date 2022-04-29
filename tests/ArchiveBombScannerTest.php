@@ -9,7 +9,6 @@ use Selective\ArchiveBomb\Engine\RarBombEngine;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use Selective\ArchiveBomb\Scanner\BombScanner;
 use Selective\ArchiveBomb\Scanner\BombScannerResult;
-use SplFileInfo;
 use SplFileObject;
 use SplTempFileObject;
 
