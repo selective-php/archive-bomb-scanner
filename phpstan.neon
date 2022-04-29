@@ -2,5 +2,8 @@ parameters:
 	level: 8
 	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
+	paths:
+		- src
+		- tests
 	ignoreErrors:
 		- '#Cannot access offset 1 on array\|false.#'
