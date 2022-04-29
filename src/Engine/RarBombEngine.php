@@ -56,7 +56,7 @@ final class RarBombEngine implements EngineInterface
         // http://web.archive.org/web/20201223151701/https://aerasec.de/security/advisories/decompression-bomb-vulnerability.html
         foreach ($rarArchive->getEntries() as $entry) {
             $compressedSize = $entry->getPackedSize();
-            $originalSize = $entry->getUnpackedSize();
+            $originalSize = (float)$entry->getUnpackedSize();
             $ration = $originalSize / $compressedSize;
             break;
         }

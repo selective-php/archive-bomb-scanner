@@ -2,16 +2,14 @@
 
 namespace Selective\ArchiveBomb\Test;
 
-use FilesystemIterator;
 use PHPUnit\Framework\TestCase;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use RuntimeException;
 use Selective\ArchiveBomb\Engine\PngBompEngine;
 use Selective\ArchiveBomb\Engine\RarBombEngine;
 use Selective\ArchiveBomb\Engine\ZipBombEngine;
 use Selective\ArchiveBomb\Scanner\BombScanner;
 use Selective\ArchiveBomb\Scanner\BombScannerResult;
+use SplFileInfo;
 use SplFileObject;
 use SplTempFileObject;
 
@@ -25,7 +23,7 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function testCreateInstance(): void
     {
-        self::assertInstanceOf(BombScanner::class, new BombScanner());
+        $this->assertInstanceOf(BombScanner::class, new BombScanner());
     }
 
     /**
@@ -38,7 +36,7 @@ class ArchiveBombScannerTest extends TestCase
      */
     public function testScanFile(string $filename, bool $expected): void
     {
-        self::assertFileExists($filename);
+        $this->assertFileExists($filename);
 
         $scanner = new BombScanner();
 
@@ -49,15 +47,15 @@ class ArchiveBombScannerTest extends TestCase
         $file = new SplFileObject($filename);
         $actual = $scanner->scanFile($file);
 
-        self::assertSame($expected, $actual->isBomb());
-        self::assertTrue($actual->equals(new BombScannerResult($actual->isBomb())));
+        $this->assertSame($expected, $actual->isBomb());
+        $this->assertTrue($actual->equals(new BombScannerResult($actual->isBomb())));
 
         // In memory scanning
         $tempFile = new SplTempFileObject();
         $tempFile->fwrite((string)file_get_contents($filename));
         $actual = $scanner->scanFile($file);
 
-        self::assertSame($expected, $actual->isBomb());
+        $this->assertSame($expected, $actual->isBomb());
     }
 
     /**
@@ -101,17 +99,19 @@ class ArchiveBombScannerTest extends TestCase
      *
      * @param string $path The path
      *
-     * @return array<mixed> The files
+     * @return array<int, string> The files
      */
     private function findFiles(string $path): array
     {
         $result = [];
-        $directory = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
-        foreach (new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST) as $item) {
-            if (!$item->isFile()) {
-                continue;
-            }
-            $result[] = $item->getRealPath();
+        $files = glob(sprintf('%s/*', $path));
+
+        if ($files === false) {
+            return [];
+        }
+
+        foreach ($files as $file) {
+            $result[] = (string)realpath($file);
         }
 
         return $result;
