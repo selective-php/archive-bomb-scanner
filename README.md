@@ -111,4 +111,4 @@ if ($scannerResult->isBomb()) {
 
 ## License
 
-* MIT
+MIT
