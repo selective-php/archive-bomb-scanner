@@ -37,6 +37,8 @@ return (new Config())
                 'imports_order' => ['class', 'const', 'function']
             ],
             'single_line_throw' => false,
+            'fully_qualified_strict_types' => true,
+            'global_namespace_import' => false,
         ]
     )
     ->setFinder(

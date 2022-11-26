@@ -13,7 +13,7 @@
   "homepage": "https://github.com/selective-php/archive-bomb-scanner",
   "license": "MIT",
   "require": {
-    "php": "^7.3 || ^8.0"
+    "php": "^8.0"
   },
   "require-dev": {
     "overtrue/phplint": "^1.1",
@@ -31,7 +31,7 @@
     "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --config=.cs.php --ansi",
     "cs:fix": "php-cs-fixer fix --config=.cs.php --ansi",
     "phoenix": "phoenix --ansi",
-    "stan": "phpstan analyse -c phpstan.neon --no-progress --ansi",
+    "stan": "phpstan analyse -c phpstan.neon --no-progress --ansi --xdebug",
     "schema:dump": "php bin/console.php schema-dump --ansi",
     "sniffer:check": "phpcs --standard=phpcs.xml",
     "sniffer:fix": "phpcbf --standard=phpcs.xml",
