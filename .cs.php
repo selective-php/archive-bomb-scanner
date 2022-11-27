@@ -20,7 +20,6 @@ return (new Config())
             'cast_spaces' => ['space' => 'none'],
             'concat_space' => ['spacing' => 'one'],
             'compact_nullable_typehint' => true,
-            'declare_equal_normalize' => ['space' => 'single'],
             'increment_style' => ['style' => 'post'],
             'list_syntax' => ['syntax' => 'short'],
             'echo_tag_syntax' => ['format' => 'long'],
