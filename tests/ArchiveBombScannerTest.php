@@ -15,7 +15,7 @@ use SplTempFileObject;
 /**
  * Test.
  */
-class ArchiveBombScannerTest extends TestCase
+final class ArchiveBombScannerTest extends TestCase
 {
     /**
      * Test.
@@ -62,31 +62,31 @@ class ArchiveBombScannerTest extends TestCase
      *
      * @return array<mixed> The test data
      */
-    public function providerGetImageTypeFromFile(): array
+    public static function providerGetImageTypeFromFile(): array
     {
         $result = [];
 
-        foreach ($this->findFiles(__DIR__ . '/files/zip') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/zip') as $file) {
             $result[] = [$file, true];
         }
 
-        foreach ($this->findFiles(__DIR__ . '/files/zip-ok') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/zip-ok') as $file) {
             $result[] = [$file, false];
         }
 
-        foreach ($this->findFiles(__DIR__ . '/files/rar') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/rar') as $file) {
             $result[] = [$file, true];
         }
 
-        foreach ($this->findFiles(__DIR__ . '/files/rar-ok') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/rar-ok') as $file) {
             $result[] = [$file, false];
         }
 
-        foreach ($this->findFiles(__DIR__ . '/files/png') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/png') as $file) {
             $result[] = [$file, true];
         }
 
-        foreach ($this->findFiles(__DIR__ . '/files/png-ok') as $file) {
+        foreach (self::findFiles(__DIR__ . '/files/png-ok') as $file) {
             $result[] = [$file, false];
         }
 
@@ -100,7 +100,7 @@ class ArchiveBombScannerTest extends TestCase
      *
      * @return array<int, string> The files
      */
-    private function findFiles(string $path): array
+    private static function findFiles(string $path): array
     {
         $result = [];
         $files = glob(sprintf('%s/*', $path));

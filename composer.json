@@ -1,58 +1,58 @@
 {
-  "name": "selective/archive-bomb-scanner",
-  "description": "ZIP and PNG bomb scanner",
-  "license": "MIT",
-  "type": "library",
-  "keywords": [
-    "archive-bomb",
-    "zip-bomb",
-    "scanner",
-    "zip",
-    "png",
-    "png-bomb"
-  ],
-  "homepage": "https://github.com/selective-php/archive-bomb-scanner",
-  "require": {
-    "php": "^8.0"
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3",
-    "phpstan/phpstan": "^1",
-    "phpunit/phpunit": "^9 || ^10",
-    "selective/rar": "^0.1 || ^0.2",
-    "squizlabs/php_codesniffer": "^3"
-  },
-  "suggest": {
-    "ext-zip": "Use this extension to detect ZIP archive bombs",
-    "selective/rar": "Use this package to detect RAR archive bombs"
-  },
-  "autoload": {
-    "psr-4": {
-      "Selective\\ArchiveBomb\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Selective\\ArchiveBomb\\Test\\": "tests"
-    }
-  },
-  "config": {
-    "process-timeout": 0,
-    "sort-packages": true
-  },
-  "scripts": {
-    "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --config=.cs.php --ansi",
-    "cs:fix": "php-cs-fixer fix --config=.cs.php --ansi",
-    "sniffer:check": "phpcs --standard=phpcs.xml",
-    "sniffer:fix": "phpcbf --standard=phpcs.xml",
-    "stan": "phpstan analyse -c phpstan.neon --no-progress --ansi --xdebug",
-    "test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always",
-    "test:all": [
-      "@cs:check",
-      "@sniffer:check",
-      "@stan",
-      "@test"
+    "name": "selective/archive-bomb-scanner",
+    "description": "ZIP and PNG bomb scanner",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "archive-bomb",
+        "zip-bomb",
+        "scanner",
+        "zip",
+        "png",
+        "png-bomb"
     ],
-    "test:coverage": "php -d xdebug.mode=coverage -r \"require 'vendor/bin/phpunit';\" -- --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-clover build/logs/clover.xml --coverage-html build/coverage"
-  }
+    "homepage": "https://github.com/selective-php/archive-bomb-scanner",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3",
+        "phpstan/phpstan": "^1",
+        "phpunit/phpunit": "^10",
+        "selective/rar": "^0.2 || ^0.3",
+        "squizlabs/php_codesniffer": "^3"
+    },
+    "suggest": {
+        "ext-zip": "Use this extension to detect ZIP archive bombs",
+        "selective/rar": "Use this package to detect RAR archive bombs"
+    },
+    "autoload": {
+        "psr-4": {
+            "Selective\\ArchiveBomb\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Selective\\ArchiveBomb\\Test\\": "tests"
+        }
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "scripts": {
+        "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --config=.cs.php --ansi",
+        "cs:fix": "php-cs-fixer fix --config=.cs.php --ansi",
+        "sniffer:check": "phpcs --standard=phpcs.xml",
+        "sniffer:fix": "phpcbf --standard=phpcs.xml",
+        "stan": "phpstan analyse -c phpstan.neon --no-progress --ansi --xdebug",
+        "test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always",
+        "test:all": [
+            "@cs:check",
+            "@sniffer:check",
+            "@stan",
+            "@test"
+        ],
+        "test:coverage": "php -d xdebug.mode=coverage -r \"require 'vendor/bin/phpunit';\" -- --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-clover build/logs/clover.xml --coverage-html build/coverage"
+    }
 }

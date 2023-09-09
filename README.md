@@ -19,7 +19,7 @@ ZIP and PNG bomb scanner for PHP.
 
 ## Requirements
 
-* PHP 8.0+
+* PHP 8.1+
 
 ## Installation
 
