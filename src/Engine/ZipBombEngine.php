@@ -69,7 +69,7 @@ final class ZipBombEngine implements EngineInterface
     private function openZip(string $filename): ZipArchive
     {
         $zip = new ZipArchive();
-        $result = $zip->open($filename, ZIPARCHIVE::CREATE);
+        $result = $zip->open($filename, ZipArchive::CREATE);
 
         if ($result !== true) {
             $errorMap = [
