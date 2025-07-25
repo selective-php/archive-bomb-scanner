@@ -15,7 +15,7 @@ final class RarBombEngine implements EngineInterface
     /**
      * @var int
      */
-    private $maxRatio;
+    private int $maxRatio;
 
     /**
      * The constructor.
@@ -51,17 +51,18 @@ final class RarBombEngine implements EngineInterface
         $fileReader = new RarFileReader();
         $rarArchive = $fileReader->openFile($file);
 
-        $ration = 0;
-
         // http://web.archive.org/web/20201223151701/https://aerasec.de/security/advisories/decompression-bomb-vulnerability.html
         foreach ($rarArchive->getEntries() as $entry) {
             $compressedSize = $entry->getPackedSize();
             $originalSize = (float)$entry->getUnpackedSize();
             $ration = $originalSize / $compressedSize;
-            break;
+
+            if ($ration >= $this->maxRatio) {
+                return new BombScannerResult($ration >= $this->maxRatio);
+            }
         }
 
-        return new BombScannerResult($ration >= $this->maxRatio);
+        return new BombScannerResult(false);
     }
 
     /**

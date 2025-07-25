@@ -10,7 +10,7 @@ final class BombScannerResult
     /**
      * @var bool The result
      */
-    private $isBomb;
+    private bool $isBomb;
 
     /**
      * ImageType constructor.
