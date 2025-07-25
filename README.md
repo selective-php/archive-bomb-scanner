@@ -4,9 +4,6 @@ ZIP and PNG bomb scanner for PHP.
 
 [![Latest Version on Packagist](https://img.shields.io/github/release/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://packagist.org/packages/selective/archive-bomb-scanner)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://github.com/selective-php/archive-bomb-scanner/workflows/build/badge.svg)](https://github.com/selective-php/archive-bomb-scanner/actions)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://scrutinizer-ci.com/g/selective-php/archive-bomb-scanner/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/quality/g/selective-php/archive-bomb-scanner.svg?style=flat-square)](https://scrutinizer-ci.com/g/selective-php/archive-bomb-scanner/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/selective/archive-bomb-scanner.svg?style=flat-square)](https://packagist.org/packages/selective/archive-bomb-scanner/stats)
 
 ## Features
@@ -19,7 +16,7 @@ ZIP and PNG bomb scanner for PHP.
 
 ## Requirements
 
-* PHP 8.1+
+* PHP 8.1 - 8.4
 
 ## Installation
 
