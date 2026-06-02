@@ -11,6 +11,7 @@ use Selective\ArchiveBomb\Scanner\BombScanner;
 use Selective\ArchiveBomb\Scanner\BombScannerResult;
 use SplFileObject;
 use SplTempFileObject;
+use ZipArchive;
 
 /**
  * Test.
@@ -65,9 +66,15 @@ final class ArchiveBombScannerTest extends TestCase
     public static function providerGetImageTypeFromFile(): array
     {
         $result = [];
+        $zipBombFiles = [
+            '10.zip',
+            '20.zip',
+            '30.zip',
+            '34.zip',
+        ];
 
         foreach (self::findFiles(__DIR__ . '/files/zip') as $file) {
-            $result[] = [$file, true];
+            $result[] = [$file, in_array(basename($file), $zipBombFiles, true)];
         }
 
         foreach (self::findFiles(__DIR__ . '/files/zip-ok') as $file) {
@@ -135,5 +142,34 @@ final class ArchiveBombScannerTest extends TestCase
         unlink($filename);
 
         $scanner->scanFile($file);
+    }
+
+    /**
+     * Test.
+     */
+    public function testScanFileWithMultipleZipEntries(): void
+    {
+        $filename = tempnam(sys_get_temp_dir(), 'zip-ok-');
+        $this->assertIsString($filename);
+
+        try {
+            $zip = new ZipArchive();
+            $result = $zip->open($filename, ZipArchive::OVERWRITE);
+            $this->assertTrue($result === true);
+            $this->assertTrue($zip->addFromString('one.txt', 'One'));
+            $this->assertTrue($zip->addFromString('two.txt', 'Two'));
+            $this->assertTrue($zip->close());
+
+            $scanner = new BombScanner();
+            $scanner->addEngine(new ZipBombEngine());
+
+            $actual = $scanner->scanFile(new SplFileObject($filename));
+
+            $this->assertFalse($actual->isBomb());
+        } finally {
+            if (file_exists($filename)) {
+                unlink($filename);
+            }
+        }
     }
 }
